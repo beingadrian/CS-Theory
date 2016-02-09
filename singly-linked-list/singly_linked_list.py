@@ -98,3 +98,17 @@ class LinkedList:
                 current_node = current_node.next
         else:
             raise Exception("Tail does not exist")
+
+    def delete_item_at_index(self, index):
+        current_node = self.head
+        previous = None
+        i = 0
+        while current_node is not None:
+            if i == index:
+                previous.next = current_node.next
+                current_node.next = None
+                self.size -= 1
+                return current_node.item
+            previous = current_node
+            current_node = current_node.next
+            i+= 1

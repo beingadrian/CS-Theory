@@ -91,6 +91,16 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.assertEqual(self.linked_list.size, initial_size - 1)
         self.assertEqual(deleted_item, "Tim")
 
+    def test_delete_at_index(self):
+        self.linked_list.insert_at_tail("Adam")
+        self.linked_list.insert_at_tail("Bob")
+        self.linked_list.insert_at_tail("Chris")
+        self.linked_list.insert_at_tail("Dylan")
+        initial_size = self.linked_list.size
+        deleted_item = self.linked_list.delete_item_at_index(3)
+        self.assertEqual(self.linked_list.size, initial_size - 1)
+        self.assertEqual(deleted_item, "Dylan")
+
 
 if __name__ == '__main__':
     unittest.main()
