@@ -56,6 +56,15 @@ class TestSinglyLinkedList(unittest.TestCase):
         item = linked_list.get_tail_item()
         self.assertIsNotNone(item)
 
+    def test_get_item_at_index(self):
+        self.linked_list.insert_at_tail("Adrian")
+        self.linked_list.insert_at_tail("Bob")
+        self.linked_list.insert_at_tail("Chris")
+        item = self.linked_list.get_item_at_index(2)
+        self.assertEqual(item, "Chris")
+        with self.assertRaises(IndexError):
+            new_item = self.linked_list.get_item_at_index(5)
+
     def test_search_for_item(self):
         linked_list = LinkedList("Bob")
         linked_list.insert_at_tail("Kim")
@@ -77,9 +86,17 @@ class TestSinglyLinkedList(unittest.TestCase):
     def test_delete_head(self):
         self.linked_list.insert_at_head("Bob")
         initial_size = self.linked_list.size
-        self.linked_list.delete_head()
+        deleted_item = self.linked_list.delete_head()
         self.assertEqual(self.linked_list.size, initial_size - 1)
+        self.assertEqual(deleted_item, "Bob")
         self.assertIsNone(self.linked_list.head)
+        self.assertIsNone(self.linked_list.tail)
+        new_linked_list = LinkedList("Adrian")
+        new_linked_list.insert_at_head("Bob")
+        new_deleted_item = new_linked_list.delete_head()
+        self.assertEqual(new_deleted_item, "Bob")
+        self.assertEqual(new_linked_list.tail.item, "Adrian")
+        self.assertEqual(new_linked_list.head.item, "Adrian")
 
     def test_delete_tail(self):
         self.linked_list.insert_at_tail("Bob")
@@ -100,7 +117,19 @@ class TestSinglyLinkedList(unittest.TestCase):
         deleted_item = self.linked_list.delete_item_at_index(3)
         self.assertEqual(self.linked_list.size, initial_size - 1)
         self.assertEqual(deleted_item, "Dylan")
+        with self.assertRaises(IndexError):
+            self.linked_list.delete_item_at_index(5)
+        with self.assertRaises(ValueError):
+            self.linked_list.delete_item_at_index("Bla")
 
+    def test_clear(self):
+        self.linked_list.insert_at_tail("Adam")
+        self.linked_list.insert_at_tail("Bob")
+        self.linked_list.insert_at_tail("Chris")
+        self.linked_list.insert_at_tail("Dylan")
+        self.linked_list.insert_at_tail("Erin")
+        self.linked_list.clear()
+        self.assertEqual(self.linked_list.size, 0)
 
 if __name__ == '__main__':
     unittest.main()

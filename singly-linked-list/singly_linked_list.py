@@ -50,6 +50,19 @@ class LinkedList:
             return self.tail
         return None
 
+    def get_item_at_index(self, index):
+        if type(index) is not int:
+            raise ValueError("Invalid index")
+        if index >= self.size:
+            raise IndexError("Index out of range: {}".format(index))
+        current_node = self.head
+        i = 0
+        while current_node is not None:
+            if i == index:
+                return current_node.item
+            i += 1
+            current_node = current_node.next
+
     # search operations
 
     def search_for_item(self, item):
@@ -80,9 +93,12 @@ class LinkedList:
             old_head = self.head
             self.head = old_head.next
             old_head.next = None
+            if self.head is None:
+                self.tail = None
             self.size -= 1
+            return old_head.item
         else:
-            raise Exception("Head does not exist")
+            return None
 
     def delete_tail(self):
         if self.tail is not None:
@@ -97,9 +113,13 @@ class LinkedList:
                     return deleted_item
                 current_node = current_node.next
         else:
-            raise Exception("Tail does not exist")
+            raise ValueError("Tail does not exist")
 
     def delete_item_at_index(self, index):
+        if type(index) is not int:
+            raise ValueError("Invalid index")
+        if index >= self.size:
+            raise IndexError("Index out of range: {}".format(index))
         current_node = self.head
         previous = None
         i = 0
@@ -112,3 +132,7 @@ class LinkedList:
             previous = current_node
             current_node = current_node.next
             i+= 1
+
+    def clear(self):
+        while self.delete_head() is not None:
+            self.delete_head()
