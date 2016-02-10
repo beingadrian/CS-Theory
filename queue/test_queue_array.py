@@ -1,7 +1,7 @@
-# Queue tests
+# Queue array tests
 
 import unittest
-from queue import Queue
+from queue_array import Queue
 
 class TestStack(unittest.TestCase):
 
@@ -39,7 +39,7 @@ class TestStack(unittest.TestCase):
         self.assertEqual(self.queue.get_size(), 0)
 
     def test_get_size(self):
-        self.assertEqual(self.queue.get_size(), self.queue.linked_list.size)
+        self.assertEqual(self.queue.get_size(), 0)
 
 
 if __name__ == '__main__':
