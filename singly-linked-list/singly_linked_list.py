@@ -14,7 +14,7 @@ class LinkedList:
         self.head = None
         self.tail = None
         self.size = 0
-        if item:
+        if item is not None:
             self.head = self.Node(item)
             self.tail = self.head
             self.size = 1
