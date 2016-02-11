@@ -132,7 +132,7 @@ class LinkedList:
         """
         Removes the item at the tail.
         Returns the deleted item.
-        Raises ValueError if there is no tail.
+        Returns none if there is no tail.
         """
         if self.tail is not None:
             current_node = self.head
@@ -146,7 +146,7 @@ class LinkedList:
                     return deleted_item
                 current_node = current_node.next
         else:
-            raise ValueError("Tail does not exist")
+            return None
 
     def delete_item_at_index(self, index):
         """

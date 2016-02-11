@@ -91,6 +91,8 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.assertEqual(deleted_item, "Bob")
         self.assertIsNone(self.linked_list.head)
         self.assertIsNone(self.linked_list.tail)
+        another_deleted_item = self.linked_list.delete_head()
+        self.assertIsNone(another_deleted_item)
         new_linked_list = LinkedList("Adrian")
         new_linked_list.insert_at_head("Bob")
         new_deleted_item = new_linked_list.delete_head()
@@ -107,6 +109,9 @@ class TestSinglyLinkedList(unittest.TestCase):
         deleted_item = self.linked_list.delete_tail()
         self.assertEqual(self.linked_list.size, initial_size - 1)
         self.assertEqual(deleted_item, "Tim")
+        empty_linked_list = LinkedList()
+        empty_item = empty_linked_list.delete_tail()
+        self.assertIsNone(empty_item)
 
     def test_delete_at_index(self):
         self.linked_list.insert_at_tail("Adam")
@@ -128,6 +133,7 @@ class TestSinglyLinkedList(unittest.TestCase):
         self.linked_list.insert_at_tail("Chris")
         self.linked_list.insert_at_tail("Dylan")
         self.linked_list.insert_at_tail("Erin")
+        self.assertEqual(self.linked_list.size, 5)
         self.linked_list.clear()
         self.assertEqual(self.linked_list.size, 0)
 

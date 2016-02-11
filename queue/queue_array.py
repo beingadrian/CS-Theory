@@ -1,6 +1,5 @@
 # Queue array implementation
 
-
 class Queue:
     """
     An implementation for the Queue data structure

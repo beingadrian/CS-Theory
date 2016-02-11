@@ -5,7 +5,10 @@ sys.path.insert(0, '../singly-linked-list')
 from singly_linked_list import LinkedList
 
 class Stack:
-    """An implementation for the Stack data structure"""
+    """
+    An implementation for the Stack data structure
+    using a linked list.
+    """
 
     def __init__(self, item=None):
         self.linked_list = LinkedList(item)
