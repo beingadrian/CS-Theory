@@ -4,6 +4,8 @@ import sys
 sys.path.insert(0, '../singly-linked-list')
 from singly_linked_list import LinkedList
 
+# load factor = items / buckets
+
 class HashTable:
     """
     An implementation for the hash table data structure
@@ -11,9 +13,7 @@ class HashTable:
 
     def __init__(self, bucket_count):
         self.bucket_count = bucket_count
-        self.buckets = []
-        for i in range(0, bucket_count):
-            self.buckets.append(LinkedList())
+        self.buckets = [LinkedList() for i in range(0, bucket_count)]
         self.item_count = 0
 
     def __getitem__(self, key):
