@@ -26,14 +26,18 @@ class TestHashTable(unittest.TestCase):
         self.assertEqual("San Bernardino", self.hash_table["city"])
 
     def test_set_to_resize_buckets(self):
-        for i in range(0, 13):
+        for i in range(0, 16):
             self.hash_table["item{}".format(i)] = "Value"
         self.assertEqual(26, len(self.hash_table.buckets))
+        self.assertTrue(self.hash_table._load_factor() < 0.8)
 
     def test_get_item(self):
         self.hash_table["city"] = "San Francisco"
         self.assertEqual(1, self.hash_table.item_count)
         self.assertEqual("San Francisco", self.hash_table["city"])
+
+    def test_get_item_with_nonexisting_key(self):
+        self.hash_table["city"] = "San Francisco"
         self.assertIsNone(self.hash_table["state"])
 
     def test_delete_item(self):
@@ -41,13 +45,17 @@ class TestHashTable(unittest.TestCase):
         self.assertEqual(1, self.hash_table.item_count)
         del self.hash_table["city"]
         self.assertEqual(0, self.hash_table.item_count)
+
+    def test_delete_item_with_nonexisting_key(self):
         self.assertFalse("city" in self.hash_table)
         with self.assertRaises(KeyError):
             del self.hash_table["city"]
 
     def test_contains(self):
         self.hash_table["city"] = "San Francisco"
+        self.hash_table["country"] = "United States"
         self.assertTrue("city" in self.hash_table)
+        self.assertTrue("country" in self.hash_table)
         self.assertFalse("state" in self.hash_table)
 
 if __name__ == '__main__':
